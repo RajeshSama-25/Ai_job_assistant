@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | AI Job Assistant</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+
+</head>
+
+<body>
+
+<div class="login-container">
+
+<div class="container">
+
+<div class="row justify-content-center align-items-center min-vh-100">
+
+<div class="col-lg-5 col-md-7">
+
+<div class="login-card">
+
+<div class="text-center mb-4">
+
+<h2 class="fw-bold text-primary">
+
+AI Job Assistant
+
+</h2>
+
+<p class="text-muted">
+
+Welcome Back 👋
+
+</p>
+
+</div>
+
+<form id="loginForm">
+
+<div class="mb-3">
+
+<label class="form-label">
+
+Email Address
+
+</label>
+
+<div class="input-group">
+
+<span class="input-group-text">
+
+<i class="bi bi-envelope"></i>
+
+</span>
+
+<input
+type="email"
+class="form-control"
+id="email"
+placeholder="Enter your email"
+required>
+
+</div>
+
+</div>
+
+<div class="mb-3">
+
+<label class="form-label">
+
+Password
+
+</label>
+
+<div class="input-group">
+
+<span class="input-group-text">
+
+<i class="bi bi-lock"></i>
+
+</span>
+
+<input
+type="password"
+class="form-control"
+id="password"
+placeholder="Enter your password"
+required>
+
+<button
+class="btn btn-outline-secondary"
+type="button"
+id="togglePassword">
+
+<i class="bi bi-eye"></i>
+
+</button>
+
+</div>
+
+</div>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+<div class="form-check">
+
+<input
+class="form-check-input"
+type="checkbox"
+id="remember">
+
+<label
+class="form-check-label"
+for="remember">
+
+Remember Me
+
+</label>
+
+</div>
+
+<a
+href="#"
+class="text-decoration-none">
+
+Forgot Password?
+
+</a>
+
+</div>
+
+<div class="d-grid mb-3">
+
+<button
+type="submit"
+class="btn btn-primary btn-lg">
+
+<i class="bi bi-box-arrow-in-right"></i>
+
+Login
+
+</button>
+
+</div>
+
+<div class="text-center mb-3">
+
+<span class="text-muted">
+
+or continue with
+
+</span>
+
+</div>
+
+<div class="d-grid mb-3">
+
+<button
+type="button"
+class="btn btn-outline-dark">
+
+<i class="bi bi-google" ></i>
+
+Continue with Google
+
+</button>
+
+</div>
+
+<div class="text-center">
+
+Don't have an account?
+
+<a
+href="register.html"
+class="text-decoration-none fw-bold">
+
+Create Account
+
+</a>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Auth JS -->
+<script>
+// =========================================
+// AI Job Assistant - Login Script
+// =========================================
+
+const loginForm = document.getElementById("loginForm");
+const passwordInput = document.getElementById("password");
+const emailInput = document.getElementById("email");
+const togglePassword = document.getElementById("togglePassword");
+
+// =========================================
+// Password Show / Hide
+// =========================================
+
+togglePassword.addEventListener("click", () => {
+
+    const icon = togglePassword.querySelector("i");
+
+    if (passwordInput.type === "password") {
+
+        passwordInput.type = "text";
+
+        icon.classList.remove("bi-eye");
+        icon.classList.add("bi-eye-slash");
+
+    } else {
+
+        passwordInput.type = "password";
+
+        icon.classList.remove("bi-eye-slash");
+        icon.classList.add("bi-eye");
+
+    }
+
+});
+
+// =========================================
+// Email Validation
+// =========================================
+
+function validateEmail(email) {
+
+    const regex =
+        /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    return regex.test(email);
+
+}
+
+// =========================================
+// Bootstrap Alert
+// =========================================
+
+function showAlert(type, message) {
+
+    const oldAlert = document.querySelector(".custom-alert");
+
+    if (oldAlert) {
+
+        oldAlert.remove();
+
+    }
+
+    const div = document.createElement("div");
+
+    div.className =
+        `alert alert-${type} custom-alert`;
+
+    div.innerHTML = message;
+
+    loginForm.prepend(div);
+
+    setTimeout(() => {
+
+        div.remove();
+
+    }, 4000);
+
+}
+
+// =========================================
+// Loading Button
+// =========================================
+
+function setLoading(button, loading) {
+
+    if (loading) {
+
+        button.disabled = true;
+
+        button.innerHTML = `
+        <span class="spinner-border spinner-border-sm me-2"></span>
+        Logging in...
+        `;
+
+    } else {
+
+        button.disabled = false;
+
+        button.innerHTML = `
+        <i class="bi bi-box-arrow-in-right"></i>
+        Login
+        `;
+
+    }
+
+}
+
+// =========================================
+// Login Submit
+// =========================================
+
+loginForm.addEventListener("submit", async (e) => {
+
+    e.preventDefault();
+
+    const email = emailInput.value.trim();
+
+    const password = passwordInput.value.trim();
+
+    if (!email || !password) {
+
+        showAlert(
+            "danger",
+            "Please fill all fields."
+        );
+
+        return;
+
+    }
+
+    if (!validateEmail(email)) {
+
+        showAlert(
+            "warning",
+            "Please enter a valid email."
+        );
+
+        return;
+
+    }
+
+    const button =
+        loginForm.querySelector("button[type='submit']");
+
+    setLoading(button, true);
+
+    try {
+
+        const response = await fetch(
+            "/api/auth/login",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    email,
+
+                    password
+
+                })
+
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+
+            throw new Error(data.message);
+
+        }
+
+        localStorage.setItem(
+
+            "token",
+
+            data.token
+
+        );
+
+        localStorage.setItem(
+
+            "user",
+
+            JSON.stringify(data.user)
+
+        );
+
+        showAlert(
+
+            "success",
+
+            "Login successful! Redirecting..."
+
+        );
+
+        setTimeout(() => {
+
+            window.location.href =
+                "dashboard.html";
+
+        }, 1500);
+
+    } catch (error) {
+
+        showAlert(
+
+            "danger",
+
+            error.message ||
+            "Login failed."
+
+        );
+
+    } finally {
+
+        setLoading(button, false);
+
+    }
+
+});
+
+// =========================================
+// Google Login (Placeholder)
+// =========================================
+
+document
+    .querySelector(".btn-outline-dark")
+    .addEventListener("click", () => {
+
+        alert(
+            "Google Login will be connected in the backend."
+        );
+
+    });
+
+// =========================================
+// Auto Redirect
+// =========================================
+
+if (localStorage.getItem("token")) {
+
+    console.log("User already logged in.");
+
+}
+</script>
+<style>
+    /* ==========================================
+   GOOGLE FONT
+========================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    font-family:'Poppins',sans-serif;
+
+    min-height:100vh;
+
+    overflow-x:hidden;
+
+    background:linear-gradient(135deg,#2563eb,#4f46e5,#7c3aed);
+
+    background-size:300% 300%;
+
+    animation:bgAnimation 12s ease infinite;
+
+    position:relative;
+
+}
+
+/* ==========================================
+BACKGROUND ANIMATION
+========================================== */
+
+@keyframes bgAnimation{
+
+0%{
+
+background-position:0% 50%;
+
+}
+
+50%{
+
+background-position:100% 50%;
+
+}
+
+100%{
+
+background-position:0% 50%;
+
+}
+
+}
+
+/* ==========================================
+FLOATING CIRCLES
+========================================== */
+
+body::before{
+
+content:"";
+
+position:absolute;
+
+width:350px;
+
+height:350px;
+
+background:rgba(255,255,255,.12);
+
+border-radius:50%;
+
+top:-100px;
+
+left:-120px;
+
+filter:blur(20px);
+
+}
+
+body::after{
+
+content:"";
+
+position:absolute;
+
+width:420px;
+
+height:420px;
+
+background:rgba(255,255,255,.10);
+
+border-radius:50%;
+
+bottom:-180px;
+
+right:-120px;
+
+filter:blur(20px);
+
+}
+
+/* ==========================================
+LOGIN CONTAINER
+========================================== */
+
+.login-container{
+
+position:relative;
+
+z-index:2;
+
+}
+
+/* ==========================================
+LOGIN CARD
+========================================== */
+
+.login-card{
+
+background:rgba(255,255,255,.15);
+
+backdrop-filter:blur(18px);
+
+-webkit-backdrop-filter:blur(18px);
+
+border:1px solid rgba(255,255,255,.2);
+
+border-radius:25px;
+
+padding:45px;
+
+box-shadow:0 20px 50px rgba(0,0,0,.20);
+
+animation:slideUp .8s ease;
+
+}
+
+/* ==========================================
+ANIMATION
+========================================== */
+
+@keyframes slideUp{
+
+from{
+
+opacity:0;
+
+transform:translateY(50px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+/* ==========================================
+HEADINGS
+========================================== */
+
+.login-card h2{
+
+font-weight:700;
+
+}
+
+.login-card p{
+
+color:#f3f4f6;
+
+}
+
+/* ==========================================
+LABELS
+========================================== */
+
+.form-label{
+
+font-weight:600;
+
+color:white;
+
+}
+
+/* ==========================================
+INPUTS
+========================================== */
+
+.form-control{
+
+height:55px;
+
+border-radius:12px;
+
+border:none;
+
+box-shadow:none;
+
+}
+
+.form-control:focus{
+
+box-shadow:0 0 0 .2rem rgba(255,255,255,.25);
+
+}
+
+.input-group-text{
+
+background:white;
+
+border:none;
+
+}
+
+.btn-outline-secondary{
+
+border:none;
+
+}
+
+/* ==========================================
+BUTTONS
+========================================== */
+
+.btn-primary{
+
+height:55px;
+
+font-weight:600;
+
+border-radius:12px;
+
+transition:.3s;
+
+}
+
+.btn-primary:hover{
+
+transform:translateY(-2px);
+
+box-shadow:0 10px 25px rgba(13,110,253,.35);
+
+}
+
+.btn-outline-dark{
+
+height:55px;
+
+border-radius:12px;
+
+background:white;
+
+}
+
+.btn-outline-dark:hover{
+
+transform:translateY(-2px);
+
+}
+
+/* ==========================================
+LINKS
+========================================== */
+
+a{
+
+color:white;
+
+}
+
+a:hover{
+
+color:#dbeafe;
+
+}
+
+/* ==========================================
+CHECKBOX
+========================================== */
+
+.form-check-label{
+
+color:white;
+
+}
+
+.form-check-input{
+
+cursor:pointer;
+
+}
+
+/* ==========================================
+RESPONSIVE
+========================================== */
+
+@media(max-width:768px){
+
+.login-card{
+
+padding:30px;
+
+margin:15px;
+
+}
+
+}
+
+@media(max-width:576px){
+
+.login-card{
+
+padding:25px;
+
+}
+
+.login-card h2{
+
+font-size:28px;
+
+}
+
+}
+</style>
+</body>
+
+
+</html>

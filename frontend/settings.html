@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Settings | AI Job Assistant</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+<script>
+// Auth guard: redirect to login if not authenticated
+if (!localStorage.getItem("token")) {
+    window.location.href = "login.html";
+}
+</script>
+
+<div class="wrapper">
+
+    <!-- Sidebar -->
+
+    <nav class="sidebar">
+
+        <div class="logo">
+            <h3>AI Job Assistant</h3>
+        </div>
+
+        <ul>
+
+            <li>
+                <a href="dashboard.html">
+                    <i class="bi bi-grid"></i>
+                    Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="jobs.html">
+                    <i class="bi bi-search"></i>
+                    Jobs
+                </a>
+            </li>
+
+            <li>
+                <a href="applications.html">
+                    <i class="bi bi-briefcase"></i>
+                    Applications
+                </a>
+            </li>
+
+            <li>
+                <a href="resume.html">
+                    <i class="bi bi-file-earmark-person"></i>
+                    Resume
+                </a>
+            </li>
+
+            <li>
+                <a href="email.html">
+                    <i class="bi bi-envelope"></i>
+                    Email
+                </a>
+            </li>
+
+            <li class="active">
+                <a href="settings.html">
+                    <i class="bi bi-gear"></i>
+                    Settings
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+    <!-- Main -->
+
+    <div class="main">
+
+        <header class="topbar">
+
+            <h2>Settings</h2>
+
+            <div class="profile">
+
+                <img src="https://i.pravatar.cc/50">
+
+                <span>Rajesh</span>
+
+            </div>
+
+        </header>
+
+        <!-- Profile -->
+
+        <div class="dashboard-box">
+
+            <h4 class="mb-4">
+                Profile Information
+            </h4>
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+
+                    <label>Name</label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        class="form-control"
+                        value="Rajesh Sama">
+
+                </div>
+
+                <div class="col-md-6 mb-3">
+
+                    <label>Email</label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        class="form-control"
+                        value="rajesh@example.com">
+
+                </div>
+
+            </div>
+
+            <button
+                class="btn btn-primary"
+                id="saveProfile">
+
+                Save Changes
+
+            </button>
+
+        </div>
+
+        <!-- AI Settings -->
+
+        <div class="dashboard-box mt-4">
+
+            <h4 class="mb-4">
+                AI Preferences
+            </h4>
+
+            <div class="form-check form-switch mb-3">
+
+                <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="aiOptimize"
+                    checked>
+
+                <label class="form-check-label">
+                    Auto Optimize Resume
+                </label>
+
+            </div>
+
+            <div class="form-check form-switch mb-3">
+
+                <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="coverLetter"
+                    checked>
+
+                <label class="form-check-label">
+                    Auto Generate Cover Letter
+                </label>
+
+            </div>
+
+            <div class="form-check form-switch">
+
+                <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="jobSuggestions"
+                    checked>
+
+                <label class="form-check-label">
+                    AI Job Suggestions
+                </label>
+
+            </div>
+
+        </div>
+
+        <!-- Email Integration -->
+
+        <div class="dashboard-box mt-4">
+
+            <h4 class="mb-4">
+                Email Integration
+            </h4>
+
+            <button class="btn btn-danger me-2">
+
+                <i class="bi bi-google"></i>
+
+                Connect Gmail
+
+            </button>
+
+            <button class="btn btn-primary">
+
+                <i class="bi bi-microsoft"></i>
+
+                Connect Outlook
+
+            </button>
+
+        </div>
+
+        <!-- Appearance -->
+
+        <div class="dashboard-box mt-4">
+
+            <h4 class="mb-4">
+                Appearance
+            </h4>
+
+            <button
+                class="btn btn-dark"
+                id="darkMode">
+
+                🌙 Toggle Dark Mode
+
+            </button>
+
+        </div>
+
+        <!-- Automation -->
+
+        <div class="dashboard-box mt-4">
+
+            <h4 class="mb-4">
+                Automation
+            </h4>
+
+            <div class="form-check form-switch mb-3">
+
+                <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="trackApplications"
+                    checked>
+
+                <label class="form-check-label">
+                    Automatically Track Applications
+                </label>
+
+            </div>
+
+            <div class="form-check form-switch">
+
+                <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="followUps">
+
+                <label class="form-check-label">
+                    AI Follow-up Reminders
+                </label>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<style>
+    /* ==========================================
+   SETTINGS PAGE
+========================================== */
+
+body {
+    background: #f4f7fb;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: #1e293b;
+}
+
+/* ==========================
+Dashboard Card
+========================== */
+
+.dashboard-box {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+
+.dashboard-box:hover {
+    transform: translateY(-3px);
+}
+
+/* ==========================
+Section Title
+========================== */
+
+.dashboard-box h4 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #2563eb;
+    margin-bottom: 20px;
+}
+
+/* ==========================
+Labels
+========================== */
+
+label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: block;
+}
+
+/* ==========================
+Inputs
+========================== */
+
+.form-control,
+.form-select {
+
+    height: 50px;
+
+    border-radius: 12px;
+
+    border: 1px solid #dbe4ef;
+
+    transition: .3s;
+
+}
+
+.form-control:focus,
+.form-select:focus {
+
+    border-color: #2563eb;
+
+    box-shadow: 0 0 0 0.15rem rgba(37,99,235,.2);
+
+}
+
+/* ==========================
+Buttons
+========================== */
+
+.btn {
+
+    border-radius: 10px;
+
+    padding: 10px 20px;
+
+    font-weight: 600;
+
+}
+
+.btn-primary {
+
+    background: #2563eb;
+
+    border: none;
+
+}
+
+.btn-primary:hover {
+
+    background: #1d4ed8;
+
+}
+
+.btn-danger:hover,
+.btn-dark:hover {
+
+    opacity: .9;
+
+}
+
+/* ==========================
+Switches
+========================== */
+
+.form-check {
+
+    padding: 12px 0;
+
+}
+
+.form-check-input {
+
+    width: 50px;
+
+    height: 25px;
+
+    cursor: pointer;
+
+}
+
+.form-check-label {
+
+    margin-left: 10px;
+
+    font-weight: 500;
+
+}
+
+/* ==========================
+Profile Image
+========================== */
+
+.profile img {
+
+    width: 42px;
+
+    height: 42px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+}
+
+/* ==========================
+Notification Box
+========================== */
+
+.alert-box {
+
+    background: #eff6ff;
+
+    border-left: 5px solid #2563eb;
+
+    border-radius: 12px;
+
+    padding: 15px;
+
+    margin-top: 20px;
+
+}
+
+/* ==========================
+Dark Mode
+========================== */
+
+body.dark-mode {
+
+    background: #0f172a;
+
+    color: #f8fafc;
+
+}
+
+body.dark-mode .dashboard-box {
+
+    background: #1e293b;
+
+    color: white;
+
+}
+
+body.dark-mode h4 {
+
+    color: #60a5fa;
+
+}
+
+body.dark-mode .form-control,
+body.dark-mode .form-select {
+
+    background: #334155;
+
+    color: white;
+
+    border-color: #475569;
+
+}
+
+body.dark-mode .form-control::placeholder {
+
+    color: #cbd5e1;
+
+}
+
+body.dark-mode label {
+
+    color: white;
+
+}
+
+body.dark-mode .alert-box {
+
+    background: #334155;
+
+    border-left-color: #60a5fa;
+
+}
+
+/* ==========================
+Animations
+========================== */
+
+.dashboard-box {
+
+    animation: fadeIn .4s ease;
+
+}
+
+@keyframes fadeIn {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(15px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+/* ==========================
+Responsive
+========================== */
+
+@media (max-width: 992px) {
+
+    .dashboard-box {
+
+        padding: 20px;
+
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    .dashboard-box {
+
+        padding: 18px;
+
+    }
+
+    .btn {
+
+        width: 100%;
+
+        margin-top: 10px;
+
+    }
+
+}
+
+@media (max-width: 576px) {
+
+    h2 {
+
+        font-size: 24px;
+
+    }
+
+    .dashboard-box {
+
+        padding: 15px;
+
+    }
+
+}
+</style>
+<script>
+    // ==========================================
+// AI Job Assistant - Settings
+// ==========================================
+
+// ---------- Elements ----------
+const saveProfileBtn = document.getElementById("saveProfile");
+const darkModeBtn = document.getElementById("darkMode");
+
+const nameInput = document.getElementById("name");
+const emailInput = document.getElementById("email");
+
+const aiOptimize = document.getElementById("aiOptimize");
+const coverLetter = document.getElementById("coverLetter");
+const jobSuggestions = document.getElementById("jobSuggestions");
+
+const trackApplications = document.getElementById("trackApplications");
+const followUps = document.getElementById("followUps");
+
+// Gmail & Outlook Buttons
+const gmailBtn = document.querySelector(".btn-danger");
+const outlookBtn = document.querySelector(".btn-primary");
+
+// ==========================================
+// Save Profile
+// ==========================================
+
+saveProfileBtn.addEventListener("click", () => {
+
+    const profile = {
+
+        name: nameInput.value.trim(),
+
+        email: emailInput.value.trim()
+
+    };
+
+    localStorage.setItem(
+        "profile",
+        JSON.stringify(profile)
+    );
+
+    alert("Profile updated successfully!");
+
+});
+
+// ==========================================
+// Load Profile
+// ==========================================
+
+function loadProfile() {
+
+    const saved =
+        localStorage.getItem("profile");
+
+    if (!saved) return;
+
+    const profile = JSON.parse(saved);
+
+    nameInput.value = profile.name || "";
+
+    emailInput.value = profile.email || "";
+
+}
+
+loadProfile();
+
+// ==========================================
+// Save Preferences
+// ==========================================
+
+function savePreferences() {
+
+    const settings = {
+
+        aiOptimize: aiOptimize.checked,
+
+        coverLetter: coverLetter.checked,
+
+        jobSuggestions: jobSuggestions.checked,
+
+        trackApplications:
+            trackApplications.checked,
+
+        followUps:
+            followUps.checked
+
+    };
+
+    localStorage.setItem(
+        "settings",
+        JSON.stringify(settings)
+    );
+
+}
+
+// Save whenever a switch changes
+[
+    aiOptimize,
+    coverLetter,
+    jobSuggestions,
+    trackApplications,
+    followUps
+
+].forEach(toggle => {
+
+    toggle.addEventListener(
+        "change",
+        savePreferences
+    );
+
+});
+
+// ==========================================
+// Load Preferences
+// ==========================================
+
+function loadPreferences() {
+
+    const saved =
+        localStorage.getItem("settings");
+
+    if (!saved) return;
+
+    const settings =
+        JSON.parse(saved);
+
+    aiOptimize.checked =
+        settings.aiOptimize;
+
+    coverLetter.checked =
+        settings.coverLetter;
+
+    jobSuggestions.checked =
+        settings.jobSuggestions;
+
+    trackApplications.checked =
+        settings.trackApplications;
+
+    followUps.checked =
+        settings.followUps;
+
+}
+
+loadPreferences();
+
+// ==========================================
+// Dark Mode
+// ==========================================
+
+function enableDarkMode(enable) {
+
+    if (enable) {
+
+        document.body.classList.add("dark-mode");
+
+        localStorage.setItem(
+            "darkMode",
+            "true"
+        );
+
+    } else {
+
+        document.body.classList.remove("dark-mode");
+
+        localStorage.setItem(
+            "darkMode",
+            "false"
+        );
+
+    }
+
+}
+
+darkModeBtn.addEventListener("click", () => {
+
+    const isDark =
+        document.body.classList.contains("dark-mode");
+
+    enableDarkMode(!isDark);
+
+});
+
+// Load saved theme
+const savedTheme =
+    localStorage.getItem("darkMode");
+
+if (savedTheme === "true") {
+
+    enableDarkMode(true);
+
+}
+
+// ==========================================
+// Gmail Connection
+// ==========================================
+
+async function refreshGmailStatus() {
+    const token = localStorage.getItem("token");
+    try {
+        const response = await fetch("/api/email/gmail/status", {
+            headers: { "Authorization": "Bearer " + token }
+        });
+        const data = await response.json();
+        if (data.success && data.connected) {
+            gmailBtn.textContent = "Gmail Connected ✓";
+            gmailBtn.disabled = true;
+        }
+    } catch (error) {
+        console.error("Gmail status check failed:", error);
+    }
+}
+
+gmailBtn.addEventListener("click", async () => {
+    const token = localStorage.getItem("token");
+
+    try {
+        const response = await fetch("/api/email/gmail/connect", {
+            headers: { "Authorization": "Bearer " + token }
+        });
+        const data = await response.json();
+
+        if (data.success && data.url) {
+            window.location.href = data.url;
+        } else {
+            alert("Could not start Gmail connection. Check that GOOGLE_CLIENT_ID/SECRET are set in the backend .env.");
+        }
+    } catch (error) {
+        alert("Could not reach the server to start Gmail connection.");
+    }
+
+    // Future:
+    // window.location =
+    // "/api/auth/google";
+
+});
+
+// ==========================================
+// Outlook Connection
+// ==========================================
+
+outlookBtn.addEventListener("click", () => {
+
+    if (outlookBtn.innerText.includes("Outlook")) {
+
+        alert(
+`Outlook Integration
+
+Coming Soon
+
+Microsoft OAuth will be used.`
+        );
+
+    }
+
+});
+
+// ==========================================
+// Backend Sync
+// ==========================================
+
+async function syncSettings() {
+
+    const profile = JSON.parse(
+        localStorage.getItem("profile")
+    ) || {};
+
+    const settings = JSON.parse(
+        localStorage.getItem("settings")
+    ) || {};
+
+    const payload = {
+        full_name: profile.name,
+        auto_resume: settings.aiOptimize,
+        auto_cover_letter: settings.coverLetter,
+        auto_job_match: settings.jobSuggestions,
+        follow_up: settings.followUps
+    };
+
+    console.log(
+        "Sync Payload:",
+        payload
+    );
+
+    const token = localStorage.getItem("token");
+
+    if (!token) return;
+
+    try {
+
+        await fetch(
+            "/api/settings",
+            {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type":
+                    "application/json",
+                    "Authorization": "Bearer " + token
+                },
+
+                body:
+                JSON.stringify(payload)
+
+            }
+
+        );
+
+    } catch (error) {
+
+        console.warn("Could not sync settings to server:", error);
+
+    }
+
+}
+
+// Load settings from the backend on page load,
+// falling back to whatever is cached in localStorage
+async function loadSettingsFromServer() {
+
+    const token = localStorage.getItem("token");
+
+    if (!token) return;
+
+    try {
+
+        const response = await fetch(
+            "/api/settings",
+            {
+                headers: {
+                    "Authorization": "Bearer " + token
+                }
+            }
+        );
+
+        if (!response.ok) return;
+
+        const data = await response.json();
+
+        if (!data.success) return;
+
+        if (data.user) {
+            nameInput.value = data.user.full_name || "";
+            emailInput.value = data.user.email || "";
+        }
+
+        if (data.ai_settings) {
+            aiOptimize.checked = data.ai_settings.auto_resume;
+            coverLetter.checked = data.ai_settings.auto_cover_letter;
+            jobSuggestions.checked = data.ai_settings.auto_job_match;
+            followUps.checked = data.ai_settings.follow_up;
+        }
+
+    } catch (error) {
+
+        console.warn("Could not load settings from server, using cached values.", error);
+
+    }
+
+}
+
+loadSettingsFromServer();
+refreshGmailStatus();
+
+// If we just came back from the Google OAuth consent screen, show the result.
+(() => {
+    const params = new URLSearchParams(window.location.search);
+    const gmailResult = params.get("gmail");
+    if (gmailResult === "connected") {
+        alert("Gmail connected! We'll start pulling in interview/offer/rejection emails automatically.");
+    } else if (gmailResult === "error") {
+        alert("Gmail connection failed. Please try again.");
+    }
+})();
+
+// Sync after profile save
+saveProfileBtn.addEventListener(
+    "click",
+    syncSettings
+);
+
+// ==========================================
+// Notifications
+// ==========================================
+
+function showNotification(message) {
+
+    const toast = document.createElement("div");
+
+    toast.className =
+        "alert alert-success position-fixed";
+
+    toast.style.top = "20px";
+    toast.style.right = "20px";
+    toast.style.zIndex = "9999";
+
+    toast.innerHTML = message;
+
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+
+        toast.remove();
+
+    }, 3000);
+
+}
+
+// Replace alert for profile save
+saveProfileBtn.addEventListener("click", () => {
+
+    showNotification("Settings saved successfully!");
+
+});
+
+// ==========================================
+// Initialize
+// ==========================================
+
+console.log("Settings Loaded Successfully 🚀");
+</script>
+
+</body>
+
+</html>

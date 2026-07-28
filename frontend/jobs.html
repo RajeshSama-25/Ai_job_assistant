@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Jobs | AI Job Assistant</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+<script>
+// Auth guard: redirect to login if not authenticated
+if (!localStorage.getItem("token")) {
+    window.location.href = "login.html";
+}
+</script>
+
+<div class="wrapper">
+
+    <!-- Sidebar -->
+
+    <nav class="sidebar">
+
+        <div class="logo">
+
+            <h3>AI Job Assistant</h3>
+
+        </div>
+
+        <ul>
+
+            <li>
+
+                <a href="dashboard.html">
+
+                    <i class="bi bi-grid"></i>
+
+                    Dashboard
+
+                </a>
+
+            </li>
+
+            <li class="active">
+
+                <a href="jobs.html">
+
+                    <i class="bi bi-search"></i>
+
+                    Jobs
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="applications.html">
+
+                    <i class="bi bi-briefcase"></i>
+
+                    Applications
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="resume.html">
+
+                    <i class="bi bi-file-earmark-person"></i>
+
+                    Resume
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="email.html">
+
+                    <i class="bi bi-envelope"></i>
+
+                    Email
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="settings.html">
+
+                    <i class="bi bi-gear"></i>
+
+                    Settings
+
+                </a>
+
+            </li>
+
+        </ul>
+
+    </nav>
+
+    <!-- Main -->
+
+    <div class="main">
+
+        <!-- Top Bar -->
+
+        <header class="topbar">
+
+            <h2>Job Search</h2>
+
+            <div class="profile">
+
+                <img src="https://i.pravatar.cc/50" alt="Profile">
+
+                <span>Rajesh</span>
+
+            </div>
+
+        </header>
+
+        <!-- Search -->
+
+        <div class="dashboard-box mb-4">
+
+            <div class="row g-3">
+
+                <div class="col-lg-5">
+
+                    <input
+                        type="text"
+                        id="searchInput"
+                        class="form-control"
+                        placeholder="Search Job Title">
+
+                </div>
+
+                <div class="col-lg-3">
+
+                    <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Location">
+
+                </div>
+
+                <div class="col-lg-2">
+
+                    <select class="form-select">
+
+                        <option>Experience</option>
+                        <option>Fresher</option>
+                        <option>1+ Years</option>
+                        <option>3+ Years</option>
+                        <option>5+ Years</option>
+
+                    </select>
+
+                </div>
+
+                <div class="col-lg-2">
+
+                    <button
+                        class="btn btn-primary w-100"
+                        id="searchBtn">
+
+                        Search
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Content -->
+
+        <div class="row">
+
+            <!-- Filters -->
+
+            <div class="col-lg-3">
+
+                <div class="dashboard-box">
+
+                    <h5 class="mb-3">
+
+                        Filters
+
+                    </h5>
+
+                    <label>Work Mode</label>
+
+                    <select class="form-select mb-3">
+
+                        <option>All</option>
+                        <option>Remote</option>
+                        <option>Hybrid</option>
+                        <option>On-site</option>
+
+                    </select>
+
+                    <label>Salary</label>
+
+                    <select class="form-select mb-3">
+
+                        <option>Any</option>
+                        <option>₹5 LPA+</option>
+                        <option>₹10 LPA+</option>
+                        <option>₹20 LPA+</option>
+
+                    </select>
+
+                    <label>Job Type</label>
+
+                    <select class="form-select">
+
+                        <option>Full-Time</option>
+                        <option>Part-Time</option>
+                        <option>Contract</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <!-- Job List -->
+
+            <div class="col-lg-9">
+
+                <div id="jobsContainer">
+
+                    <!-- Job Card -->
+
+                    <div class="job-card">
+
+                        <div class="d-flex justify-content-between">
+
+                            <div>
+
+                                <h4>Frontend Developer</h4>
+
+                                <p class="text-muted">
+
+                                    Google • Remote • Hyderabad
+
+                                </p>
+
+                            </div>
+
+                            <span class="badge bg-success">
+
+                                96% Match
+
+                            </span>
+
+                        </div>
+
+                        <p>
+
+                            React, JavaScript, HTML, CSS, REST APIs.
+
+                        </p>
+
+                        <div class="d-flex gap-2">
+
+                            <button class="btn btn-primary">
+
+                                Apply
+
+                            </button>
+
+                            <button class="btn btn-outline-danger saveJob">
+
+                                <i class="bi bi-heart"></i>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div class="job-card mt-3">
+
+                        <div class="d-flex justify-content-between">
+
+                            <div>
+
+                                <h4>Node.js Developer</h4>
+
+                                <p class="text-muted">
+
+                                    Amazon • Remote
+
+                                </p>
+
+                            </div>
+
+                            <span class="badge bg-primary">
+
+                                92% Match
+
+                            </span>
+
+                        </div>
+
+                        <p>
+
+                            Express.js, PostgreSQL, REST API.
+
+                        </p>
+
+                        <div class="d-flex gap-2">
+
+                            <button class="btn btn-primary">
+
+                                Apply
+
+                            </button>
+
+                            <button class="btn btn-outline-danger saveJob">
+
+                                <i class="bi bi-heart"></i>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<style>
+    /* ==========================================
+   JOBS PAGE
+========================================== */
+
+.page-title{
+    font-size:28px;
+    font-weight:700;
+    color:#1e293b;
+}
+
+.dashboard-box{
+    background:#fff;
+    border-radius:18px;
+    padding:25px;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+}
+
+/* ==========================================
+SEARCH
+========================================== */
+
+.form-control,
+.form-select{
+
+    height:52px;
+
+    border-radius:12px;
+
+    border:1px solid #dbe4ef;
+
+}
+
+.form-control:focus,
+.form-select:focus{
+
+    box-shadow:none;
+
+    border-color:#2563eb;
+
+}
+
+/* ==========================================
+FILTERS
+========================================== */
+
+.filter-title{
+
+    font-weight:600;
+
+    margin-bottom:20px;
+
+}
+
+.dashboard-box label{
+
+    font-weight:600;
+
+    margin-bottom:8px;
+
+}
+
+/* ==========================================
+JOB CARD
+========================================== */
+
+.job-card{
+
+    background:#ffffff;
+
+    border-radius:18px;
+
+    padding:25px;
+
+    margin-bottom:25px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+    border-left:5px solid transparent;
+
+}
+
+.job-card:hover{
+
+    transform:translateY(-6px);
+
+    border-left:5px solid #2563eb;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.12);
+
+}
+
+.job-card h4{
+
+    font-weight:700;
+
+    margin-bottom:6px;
+
+}
+
+.job-card p{
+
+    margin-bottom:15px;
+
+}
+
+/* ==========================================
+MATCH SCORE
+========================================== */
+
+.badge{
+
+    font-size:14px;
+
+    padding:8px 14px;
+
+}
+
+/* ==========================================
+BUTTONS
+========================================== */
+
+.job-card .btn{
+
+    border-radius:10px;
+
+    padding:10px 18px;
+
+}
+
+.saveJob{
+
+    width:50px;
+
+}
+
+.saveJob.saved{
+
+    background:#dc3545;
+
+    color:#fff;
+
+}
+
+/* ==========================================
+COMPANY TAGS
+========================================== */
+
+.company-info{
+
+    display:flex;
+
+    gap:15px;
+
+    flex-wrap:wrap;
+
+    margin:15px 0;
+
+}
+
+.company-tag{
+
+    background:#eef4ff;
+
+    color:#2563eb;
+
+    padding:6px 12px;
+
+    border-radius:20px;
+
+    font-size:13px;
+
+}
+
+/* ==========================================
+SALARY
+========================================== */
+
+.salary{
+
+    font-weight:700;
+
+    color:#16a34a;
+
+}
+
+/* ==========================================
+RESPONSIVE
+========================================== */
+
+@media(max-width:992px){
+
+    .job-card{
+
+        padding:20px;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .topbar{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:15px;
+
+    }
+
+    .job-card .d-flex{
+
+        flex-direction:column;
+
+        gap:15px;
+
+    }
+
+}
+
+@media(max-width:576px){
+
+    .dashboard-box{
+
+        padding:18px;
+
+    }
+
+    .job-card{
+
+        padding:18px;
+
+    }
+
+}
+</style>
+<script>
+    // ==========================================
+// AI Job Assistant - Jobs Page
+// ==========================================
+
+// Sample Job Data
+let jobs = [
+    {
+        id: 1,
+        title: "Frontend Developer",
+        company: "Google",
+        location: "Hyderabad",
+        mode: "Remote",
+        salary: "₹18 LPA",
+        match: 96,
+        skills: "React, HTML, CSS, JavaScript"
+    },
+    {
+        id: 2,
+        title: "Node.js Developer",
+        company: "Amazon",
+        location: "Bangalore",
+        mode: "Hybrid",
+        salary: "₹22 LPA",
+        match: 92,
+        skills: "Node.js, Express, PostgreSQL"
+    },
+    {
+        id: 3,
+        title: "Full Stack Developer",
+        company: "Microsoft",
+        location: "Remote",
+        mode: "Remote",
+        salary: "₹24 LPA",
+        match: 95,
+        skills: "React, Node.js, MongoDB"
+    },
+    {
+        id: 4,
+        title: "Backend Developer",
+        company: "Netflix",
+        location: "Chennai",
+        mode: "On-site",
+        salary: "₹20 LPA",
+        match: 88,
+        skills: "Java, Spring Boot, MySQL"
+    }
+];
+
+// Elements
+const jobsContainer = document.getElementById("jobsContainer");
+const searchInput = document.getElementById("searchInput");
+const searchBtn = document.getElementById("searchBtn");
+
+// ==========================================
+// Render Jobs
+// ==========================================
+
+function renderJobs(jobList) {
+
+    jobsContainer.innerHTML = "";
+
+    if (jobList.length === 0) {
+
+        jobsContainer.innerHTML = `
+            <div class="alert alert-warning">
+                No matching jobs found.
+            </div>
+        `;
+        return;
+    }
+
+    jobList.forEach(job => {
+
+        jobsContainer.innerHTML += `
+
+        <div class="job-card">
+
+            <div class="d-flex justify-content-between">
+
+                <div>
+
+                    <h4>${job.title}</h4>
+
+                    <p class="text-muted">
+
+                        ${job.company} • ${job.location} • ${job.mode}
+
+                    </p>
+
+                </div>
+
+                <span class="badge bg-success">
+
+                    ${job.match}% Match
+
+                </span>
+
+            </div>
+
+            <div class="company-info">
+
+                <span class="company-tag">
+
+                    ${job.salary}
+
+                </span>
+
+                <span class="company-tag">
+
+                    ${job.skills}
+
+                </span>
+
+            </div>
+
+            <div class="d-flex gap-2 mt-3">
+
+                <button
+                    class="btn btn-primary apply-btn"
+                    data-id="${job.id}">
+
+                    Apply
+
+                </button>
+
+                <button
+                    class="btn btn-outline-danger saveJob"
+                    data-id="${job.id}">
+
+                    <i class="bi bi-heart"></i>
+
+                </button>
+
+            </div>
+
+        </div>
+
+        `;
+
+    });
+
+    attachEvents();
+
+}
+
+// ==========================================
+// Search
+// ==========================================
+
+function searchJobs() {
+
+    const keyword =
+        searchInput.value.toLowerCase();
+
+    const filtered = jobs.filter(job =>
+
+        job.title.toLowerCase().includes(keyword) ||
+
+        job.company.toLowerCase().includes(keyword) ||
+
+        job.location.toLowerCase().includes(keyword)
+
+    );
+
+    renderJobs(filtered);
+
+}
+
+searchBtn.addEventListener("click", searchJobs);
+
+searchInput.addEventListener("keyup", searchJobs);
+
+// ==========================================
+// Save Jobs
+// ==========================================
+
+function attachEvents() {
+
+    document.querySelectorAll(".saveJob")
+    .forEach(btn => {
+
+        btn.onclick = () => {
+
+            btn.classList.toggle("saved");
+
+            if (btn.classList.contains("saved")) {
+
+                btn.innerHTML =
+                    '<i class="bi bi-heart-fill"></i>';
+
+            } else {
+
+                btn.innerHTML =
+                    '<i class="bi bi-heart"></i>';
+
+            }
+
+        };
+
+    });
+
+    // Apply
+
+    document.querySelectorAll(".apply-btn")
+    .forEach(btn => {
+
+        btn.onclick = async () => {
+
+            const id = btn.dataset.id;
+            const token = localStorage.getItem("token");
+
+            if (!token) {
+                alert("Please log in to apply for jobs.");
+                return;
+            }
+
+            try {
+
+                const response = await fetch(
+                    "/api/applications",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": "Bearer " + token
+                        },
+                        body: JSON.stringify({ job_id: id })
+                    }
+                );
+
+                const data = await response.json();
+
+                if (data.success) {
+                    alert("Application submitted for Job ID: " + id);
+                } else {
+                    alert(data.message || "Could not submit application.");
+                }
+
+            } catch (error) {
+                console.warn("Apply request failed:", error);
+                alert("Applying for Job ID: " + id);
+            }
+
+        };
+
+    });
+
+}
+
+// ==========================================
+// Sort by AI Match
+// ==========================================
+
+jobs.sort((a,b)=>b.match-a.match);
+
+// Initial Render
+
+renderJobs(jobs);
+
+// ==========================================
+// Load Real Jobs From Backend (falls back to
+// the sample data above if the API is
+// unreachable or returns nothing)
+// ==========================================
+
+async function loadJobsFromServer() {
+
+    const token = localStorage.getItem("token");
+
+    if (!token) return;
+
+    try {
+
+        const response = await fetch(
+            "/api/jobs",
+            {
+                headers: {
+                    "Authorization": "Bearer " + token
+                }
+            }
+        );
+
+        if (!response.ok) return;
+
+        const data = await response.json();
+
+        if (!data.success || !data.jobs || data.jobs.length === 0) return;
+
+        jobs = data.jobs.map(job => ({
+            id: job.id,
+            title: job.job_title,
+            company: job.company,
+            location: job.location || "Not specified",
+            mode: job.work_mode || "Not specified",
+            salary: job.salary || "Not disclosed",
+            match: 90,
+            skills: (job.description || "").trim().slice(0, 80)
+        }));
+
+        jobs.sort((a, b) => b.match - a.match);
+
+        renderJobs(jobs);
+
+    } catch (error) {
+
+        console.warn("Could not load jobs from server, showing sample data.", error);
+
+    }
+
+}
+
+loadJobsFromServer();
+
+console.log("Jobs Loaded Successfully 🚀");
+</script>
+
+</body>
+
+</html>

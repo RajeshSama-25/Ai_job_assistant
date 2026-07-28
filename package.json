@@ -1,0 +1,39 @@
+{
+  "name": "ai-job-assistant-backend",
+  "version": "1.0.0",
+  "description": "AI Job Assistant Backend",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.6",
+    "dotenv": "^16.6.1",
+    "express": "^4.22.2",
+    "googleapis": "^144.0.0",
+    "helmet": "^8.2.0",
+    "jsonwebtoken": "^9.0.3",
+    "mammoth": "^1.8.0",
+    "morgan": "^1.11.0",
+    "multer": "^2.2.0",
+    "node-cron": "^3.0.3",
+    "ollama": "^0.6.3",
+    "openai": "^4.104.0",
+    "pdf-parse": "^1.1.1",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0",
+    "passport-microsoft": "^1.1.0",
+    "pg": "^8.22.0",
+    "playwright": "^1.61.1",
+    "uuid": "^11.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
